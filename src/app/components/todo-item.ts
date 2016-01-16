@@ -15,8 +15,15 @@ import {Todo} from "../services/Todo-Service";
         <header class="post-header">
             <h2 class="post-title" [class.complete]="todo.complete">{{todo.description}}</h2>
             <p class="post-meta">
-                <button class="post-category post-category-design" (click)="toggleTodo.emit(todo)">Toggle Status</button>
-                <button class="post-category post-category-js" (click)="deleteTodo.emit(todo)">Delete</button>
+                <button [ngClass]="{'post-category-design': !todo.complete, 'post-category-js': todo.complete}"
+                        class="post-category"
+                        (click)="toggleTodo.emit(todo)">
+                    {{todo.complete ? 'Undo' : 'Complete'}}
+                </button>
+                <button class="post-category post-category-js"
+                        (click)="deleteTodo.emit(todo)">
+                    Delete
+                </button>
             </p>
         </header>
     </section>

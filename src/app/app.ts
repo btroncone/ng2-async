@@ -1,6 +1,7 @@
 import { Component } from 'angular2/core';
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import { TodoList } from './views/todo-list';
+import { BasicAsync } from './views/basic-async';
 
 @Component({
 	selector: `app`,
@@ -16,6 +17,9 @@ import { TodoList } from './views/todo-list';
                     <li class="nav-item">
                         <a class="pure-button" [routerLink]=" ['TodoList']">Todo Observable</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="pure-button" [routerLink]=" ['BasicAsync']">Basic Async</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -27,6 +31,7 @@ import { TodoList } from './views/todo-list';
 	`
 })
 @RouteConfig([
-	{ path: '/todos', component: TodoList, name: 'TodoList', useAsDefault: true }
+	{ path: '/todos', component: TodoList, name: 'TodoList', useAsDefault: true },
+	{ path: '/basic-async', component: BasicAsync, name: 'BasicAsync'}
 ])
 export class App {}

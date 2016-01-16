@@ -19,7 +19,6 @@ import {AsyncPipe, AbstractControl, ControlGroup, FormBuilder, Validators} from 
         <todo-item
             *ngFor="#todo of todoService.todos | async"
             [todo]="todo"
-            (de
             (deleteTodo)="todoService.deleteTodo($event)"
             (toggleTodo)="todoService.toggleTodo($event)">
         </todo-item>

@@ -4,6 +4,7 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {App} from './app';
 import {TodoService} from "./services/Todo-Service";
+import {SampleService} from "./services/sample-service";
 
 
 export function main() {
@@ -12,7 +13,8 @@ export function main() {
       HTTP_PROVIDERS,
       ROUTER_PROVIDERS,
       ELEMENT_PROBE_PROVIDERS,
-      TodoService
+      TodoService,
+      SampleService
   ])
   .catch(err => console.error(err));
 }
