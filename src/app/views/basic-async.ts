@@ -4,19 +4,19 @@ import {SampleService} from "../services/sample-service";
 
 @Component({
     template:`
-    <button class="pure-button" (click)="sampleService.sampleBasicPromise()">Test Base Promise</button>
-    <button class="pure-button" (click)="sampleService.sampleNgHttp('btroncone')">Test Angular Http</button>
-    <button class="pure-button" (click)="testNgHttpNoAsyncPipe()">Test Angular Http (No Async Pipe)</button>
+    <button class="pure-button" (click)="testBasePromise()">Test Base Promise</button>
+    <button class="pure-button" (click)="testNgHttp()">Test Angular Http</button>
     <button class="pure-button" (click)="testBasePromiseNoAsyncPipe()">Test Base Promise (No Async Pipe)</button>
+    <button class="pure-button" (click)="testNgHttpNoAsyncPipe()">Test Angular Http (No Async Pipe)</button>
     <div class="pure-g">
         <div class="pure-u-1-4">
-            <p>{{basePromiseResponse | async}}</p>
+            <p>{{basePromiseResponse | async | json}}</p>
         </div>
         <div class="pure-u-1-4">
-            <p>{{ngHttpResponse | async}}</p>
+            <p>{{ngHttpResponse | async | json}}</p>
         </div>
         <div class="pure-u-1-4">
-            <p>Thirds</p>
+            <p>{{basePromiseReponseNoAsyncPipe | json}}</p>
         </div>
         <div class="pure-u-1-4">
             <p>Thirds</p>
@@ -26,12 +26,22 @@ import {SampleService} from "../services/sample-service";
     pipes: [AsyncPipe]
 })
 export class BasicAsync{
+    basePromiseResponse;
+    ngHttpResponse;
     basePromiseReponseNoAsyncPipe;
     ngHttpResponseNoAsyncPipe;
 
     constructor(
         private sampleService : SampleService
     ){}
+
+    testBasePromise(){
+        this.basePromiseResponse = this.sampleService.sampleBasicPromise();
+    }
+
+    testNgHttp(){
+        this.ngHttpResponse = this.sampleService.sampleNgHttp('btroncone');
+    }
 
     testBasePromiseNoAsyncPipe(){
         this.sampleService.sampleBasicPromise().then(res => {
@@ -44,4 +54,5 @@ export class BasicAsync{
             this.ngHttpResponseNoAsyncPipe = res;
         });
     }
+
 }
