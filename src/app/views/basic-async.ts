@@ -4,14 +4,22 @@ import {SampleService} from "../services/sample-service";
 
 @Component({
     template:`
-    <button class="pure-button" (click)="testBasePromise()">Test Base Promise</button>
-    <button class="pure-button" (click)="testBasePromiseNoAsyncPipe()">Test Base Promise (No Async Pipe)</button>
     <div class="pure-g">
         <div class="pure-u-1-2">
-            <p>{{basePromiseResponse | async | json}}</p>
+            <button class="pure-button" (click)="testBasePromise()">Test Base Promise</button>
+            <ul>
+                <li *ngFor="#item of basePromiseResponse | async">
+                    {{item.name}}
+                </li>
+            </ul>
         </div>
         <div class="pure-u-1-2">
-            <p>{{basePromiseResponseNoAsyncPipe | json}}</p>
+            <button class="pure-button" (click)="testBasePromiseNoAsyncPipe()">Test Base Promise (No Async Pipe)</button>
+            <ul>
+                <li *ngFor="#item of basePromiseResponseNoAsyncPipe">
+                    {{item.name}}
+                </li>
+            </ul>
         </div>
     </div>
     `,
