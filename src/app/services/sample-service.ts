@@ -25,6 +25,7 @@ export class SampleService{
     sampleNgHttp(userName : string){
         return this.http
                     .get(`https://api.github.com/users/${userName}/orgs`)
-                    .map(res => res.json());
+                    .map(res => res.json())
+                    .toPromise();
     }
 }

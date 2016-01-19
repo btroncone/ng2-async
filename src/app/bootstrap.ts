@@ -5,6 +5,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {App} from './app';
 import {TodoService} from "./services/Todo-Service";
 import {SampleService} from "./services/sample-service";
+import {SampleObservableService} from "./services/sample-observable-service";
 
 
 export function main() {

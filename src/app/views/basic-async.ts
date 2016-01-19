@@ -5,21 +5,13 @@ import {SampleService} from "../services/sample-service";
 @Component({
     template:`
     <button class="pure-button" (click)="testBasePromise()">Test Base Promise</button>
-    <button class="pure-button" (click)="testNgHttp()">Test Angular Http</button>
     <button class="pure-button" (click)="testBasePromiseNoAsyncPipe()">Test Base Promise (No Async Pipe)</button>
-    <button class="pure-button" (click)="testNgHttpNoAsyncPipe()">Test Angular Http (No Async Pipe)</button>
     <div class="pure-g">
-        <div class="pure-u-1-4">
+        <div class="pure-u-1-2">
             <p>{{basePromiseResponse | async | json}}</p>
         </div>
-        <div class="pure-u-1-4">
-            <p>{{ngHttpResponse | async | json}}</p>
-        </div>
-        <div class="pure-u-1-4">
-            <p>{{basePromiseReponseNoAsyncPipe | json}}</p>
-        </div>
-        <div class="pure-u-1-4">
-            <p>Thirds</p>
+        <div class="pure-u-1-2">
+            <p>{{basePromiseResponseNoAsyncPipe | json}}</p>
         </div>
     </div>
     `,
@@ -27,9 +19,7 @@ import {SampleService} from "../services/sample-service";
 })
 export class BasicAsync{
     basePromiseResponse;
-    ngHttpResponse;
-    basePromiseReponseNoAsyncPipe;
-    ngHttpResponseNoAsyncPipe;
+    basePromiseResponseNoAsyncPipe;
 
     constructor(
         private sampleService : SampleService
@@ -39,19 +29,9 @@ export class BasicAsync{
         this.basePromiseResponse = this.sampleService.sampleBasicPromise();
     }
 
-    testNgHttp(){
-        this.ngHttpResponse = this.sampleService.sampleNgHttp('btroncone');
-    }
-
     testBasePromiseNoAsyncPipe(){
         this.sampleService.sampleBasicPromise().then(res => {
-            this.basePromiseReponseNoAsyncPipe = res;
-        });
-    }
-
-    testNgHttpNoAsyncPipe(){
-        this.sampleService.sampleNgHttp('btroncone').subscribe(res => {
-            this.ngHttpResponseNoAsyncPipe = res;
+            this.basePromiseResponseNoAsyncPipe = res;
         });
     }
 

@@ -2,6 +2,7 @@ import { Component } from 'angular2/core';
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import { TodoList } from './views/todo-list';
 import { BasicAsync } from './views/basic-async';
+import { BasicObservable } from './views/basic-observable'
 
 @Component({
 	selector: `app`,
@@ -15,10 +16,13 @@ import { BasicAsync } from './views/basic-async';
             <nav class="nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a class="pure-button" [routerLink]=" ['TodoList']">Todo Observable</a>
+                        <a class="pure-button" [routerLink]=" ['BasicAsync']">Basic Async</a>
                     </li>
                     <li class="nav-item">
-                        <a class="pure-button" [routerLink]=" ['BasicAsync']">Basic Async</a>
+                        <a class="pure-button" [routerLink]=" ['BasicObservable']">Basic Observable</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" [routerLink]=" ['TodoList']">Todo Observable</a>
                     </li>
                 </ul>
             </nav>
@@ -32,6 +36,7 @@ import { BasicAsync } from './views/basic-async';
 })
 @RouteConfig([
 	{ path: '/todos', component: TodoList, name: 'TodoList', useAsDefault: true },
-	{ path: '/basic-async', component: BasicAsync, name: 'BasicAsync'}
+	{ path: '/basic-async', component: BasicAsync, name: 'BasicAsync'},
+	{ path: '/basic-observable', component: BasicObservable, name: 'BasicObservable'}
 ])
 export class App {}
