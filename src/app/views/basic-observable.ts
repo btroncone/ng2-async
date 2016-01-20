@@ -3,7 +3,7 @@ import {AsyncPipe} from "angular2/common";
 import {Observable} from "rxjs/Observable";
 
 @Component({
-    template: 'basic-observable',
+    selector: 'basic-observable',
     pipes: [AsyncPipe],
     template: `
     <h2>Current Total (Async Pipe): {{timerAsync | async}}</h2>
@@ -11,7 +11,9 @@ import {Observable} from "rxjs/Observable";
     `
 })
 export class BasicObservable{
+    //async pipe will manually subscribe to observable, updating the view when new values are emitted
     timerAsync = Observable.interval(1000).startWith(0);
     timer: number;
+    //without async pipe we need to manually update variable to be used in template each time a new value is emitted
     timerBase = Observable.interval(1000).startWith(0).subscribe(num => this.timer = num);
 }

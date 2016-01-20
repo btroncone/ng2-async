@@ -14,19 +14,19 @@ export interface TodoOperation{
 @Injectable()
 export class TodoService{
     public todos: ReplaySubject<Todo[]> = new ReplaySubject<Todo[]>();
-    private updates: Subject<TodoOperation> = new Subject<TodoOperation>();
+    private updateTodos: Subject<TodoOperation> = new Subject<TodoOperation>();
     private create: Subject<Todo> = new Subject<Todo>();
     private delete: Subject<Todo> = new Subject<Todo>();
     private toggleStatus: Subject<Todo> = new Subject<Todo>();
 
 
     constructor(){
-        this.updates
+        this.updateTodos
             .scan((todos : Todo[], operation: TodoOperation) => {
                 return operation(todos);
             }, [])
             .subscribe(this.todos);
-
+        //emit function to add new todo to current array of todo's
         this.create
             .map((todo : Todo) => (state : Todo[]) => {
                 return [
@@ -34,8 +34,9 @@ export class TodoService{
                     todo
                 ];
             })
-            .subscribe(this.updates);
-
+            //subscribe the updates stream to emitted functions
+            .subscribe(this.updateTodos);
+        //emit function to apply appropriate deletion transformation to current state
         this.delete
             .map((todo : Todo) => (state: Todo[]) => {
                 const todoIndex = state.indexOf(todo);
@@ -44,8 +45,9 @@ export class TodoService{
                     ...state.slice(todoIndex + 1)
                 ]
             })
-            .subscribe(this.updates);
-
+            //subscribe the updates stream to emitted functions
+            .subscribe(this.updateTodos);
+        //emit function to toggle appropriate todo
         this.toggleStatus
             .map((todo: Todo) => (state: Todo[]) => {
                 return state.map((todoItem : Todo) => {
@@ -55,9 +57,11 @@ export class TodoService{
                     return todoItem;
                 });
             })
-            .subscribe(this.updates);
+            //subscribe the updates stream to emitted functions
+            .subscribe(this.updateTodos);
     }
-
+    //public api used by controller, simply calls appropriate 'next' function adding value to stream,
+    //ultimately applying appropriate state transformation in this.updateTodos
     createTodo(todo: Todo){
         this.create.next(todo);
     }

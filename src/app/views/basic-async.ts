@@ -34,10 +34,12 @@ export class BasicAsync{
     ){}
 
     testBasePromise(){
+        //using async pipe, resolved value from sampleBasicPromise will be correctly bound to view template
         this.basePromiseResponse = this.sampleService.sampleBasicPromise();
     }
 
     testBasePromiseNoAsyncPipe(){
+        //without async pipe we need to manually grab the response and assign it to variable to be used in view template
         this.sampleService.sampleBasicPromise().then(res => {
             this.basePromiseResponseNoAsyncPipe = res;
         });
