@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from "angular2/core";
-import {TodoService, Todo} from "../services/Todo-Service";
+import {TodoService, Todo} from "../services/todo-service";
 import {TodoItem} from "./../components/todo-item";
 import {AsyncPipe, AbstractControl, ControlGroup, FormBuilder, Validators} from "angular2/common";
 
